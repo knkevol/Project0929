@@ -26,6 +26,15 @@ void Render(int x, int y) {
 	Cur.X = x;
 	Cur.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
+
+	if (PlayerX == x && PlayerY == y)
+	{
+		cout << PlayerShape;
+	}
+	else if (MonsterX == x && MonsterY == y)
+	{
+		cout << MonsterShape;
+	}
 }
 
 int Process()
@@ -60,9 +69,7 @@ int main()
 {
 	//초기위치 설정
 	Render(PlayerX, PlayerY);
-	cout << PlayerShape;
 	Render(MonsterX, MonsterY);
-	cout << MonsterShape;
 
 	while (bIsPlaying)
 	{
@@ -70,9 +77,7 @@ int main()
 		Process();
 		//현재 상태 업데이트
 		Render(PlayerX, PlayerY);
-		cout << PlayerShape;
 		Render(MonsterX, MonsterY);
-		cout << MonsterShape;
 	}
 	
 

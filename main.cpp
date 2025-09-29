@@ -14,54 +14,67 @@ bool bIsPlaying = true;
 
 int KeyCode = 0;
 
-void Input(int x, int y) {
+int Input()
+{
+	KeyCode = _getch();
+
+	return 0;
+}
+
+void Render(int x, int y) {
 	COORD Cur;
 	Cur.X = x;
 	Cur.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
 }
 
+int Process()
+{
+	if (KeyCode == 'w')
+	{
+		PlayerY--;
+	}
+	else if (KeyCode == 's')
+	{
+		PlayerY++;
+	}
+	else if (KeyCode == 'a')
+	{
+		PlayerX--;
+	}
+	else if (KeyCode == 'd')
+	{
+		PlayerX++;
+	}
+	else if (KeyCode == 'q')
+	{
+		bIsPlaying = false;
+	}
+	system("cls");
+
+	Render(PlayerX, PlayerY);
+	cout << PlayerShape;
+	Render(MonsterX, MonsterY);
+	cout << MonsterShape;
+
+	return 0;
+	
+}
+
 int main()
 {
-	Input(PlayerX, PlayerY);
+	//초기값
+	Render(PlayerX, PlayerY);
 	cout << PlayerShape;
-
-	Input(MonsterX, MonsterY);
+	Render(MonsterX, MonsterY);
 	cout << MonsterShape;
 
 	while (bIsPlaying)
 	{
-		KeyCode = _getch();
-
-
-		if (KeyCode == 'w')
-		{
-			PlayerY--;
-		}
-		else if (KeyCode == 's')
-		{
-			PlayerY++;
-		}
-		else if (KeyCode == 'a')
-		{
-			PlayerX--;
-		}
-		else if (KeyCode == 'd')
-		{
-			PlayerX++;
-		}
-		else if (KeyCode == 'q')
-		{
-			bIsPlaying = false;
-			break; 
-		}
-		system("cls");
-
-		Input(PlayerX, PlayerY);
-		cout << PlayerShape;
-
-		Input(MonsterX, MonsterY);
-		cout << MonsterShape;
+		Input();
+		Process();
 	}
+	
+
 	return 0;
 }

@@ -4,13 +4,11 @@
 
 using namespace std;
 
-
 int PlayerX = 1;
 int PlayerY = 1;
 int MonsterX = 8;
 int MonsterY = 8;
 char PlayerShape = 'P';
-
 char MonsterShape = 'M';
 bool bIsPlaying = true;
 
@@ -35,8 +33,6 @@ int main()
 	{
 		KeyCode = _getch();
 
-		int PrevPlayerX = PlayerX;
-		int PrevPlayerY = PlayerY;
 
 		if (KeyCode == 'w')
 		{

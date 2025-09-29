@@ -50,12 +50,7 @@ int Process()
 	{
 		bIsPlaying = false;
 	}
-	system("cls");
-
-	Render(PlayerX, PlayerY);
-	cout << PlayerShape;
-	Render(MonsterX, MonsterY);
-	cout << MonsterShape;
+	system("cls");	
 
 	return 0;
 	
@@ -63,7 +58,7 @@ int Process()
 
 int main()
 {
-	//초기값
+	//초기위치 설정
 	Render(PlayerX, PlayerY);
 	cout << PlayerShape;
 	Render(MonsterX, MonsterY);
@@ -73,6 +68,11 @@ int main()
 	{
 		Input();
 		Process();
+		//현재 상태 업데이트
+		Render(PlayerX, PlayerY);
+		cout << PlayerShape;
+		Render(MonsterX, MonsterY);
+		cout << MonsterShape;
 	}
 	
 

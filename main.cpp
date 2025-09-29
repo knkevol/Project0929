@@ -1,9 +1,9 @@
 ﻿#include <iostream>
 #include <conio.h>
+#include <Windows.h>
 
 using namespace std;
 
-int Map[30][30] =	{{0,}};
 
 int PlayerX = 1;
 int PlayerY = 1;
@@ -14,96 +14,58 @@ char PlayerShape = 'P';
 char MonsterShape = 'M';
 bool bIsPlaying = true;
 
-
 int KeyCode = 0;
 
-bool Predict(int NewY, int NewX)
-{
-	if (NewY >= 0 && NewY < 30 && NewX >= 0 && NewX < 30)
-	{
-		if (Map[NewY][NewX] == 0)
-		{
-			return true;
-		}
-	}
-
-	return false;
-}
-
-void Input()
-{
-	KeyCode = _getch();
-}
-
-void Process()
-{
-	int nextX = PlayerX;
-	int nextY = PlayerY;
-
-	if (KeyCode == 'w')
-	{
-		nextY--;
-	}
-	else if (KeyCode == 's')
-	{
-		nextY++;
-	}
-	else if (KeyCode == 'a')
-	{
-		nextX--;
-	}
-	else if (KeyCode == 'd')
-	{
-		nextX++;
-	}
-	else if (KeyCode == 'q')
-	{
-		bIsPlaying = false;
-		return;
-	}
-
-	if (Predict(nextY, nextX))
-	{
-		PlayerX = nextX;
-		PlayerY = nextY;
-	}
-
-}
-
-void Render()
-{
-	system("cls");
-	for (int Y = 0; Y < 30; Y++)
-	{
-		for (int X = 0; X < 30; X++)
-		{
-			if (PlayerX == X && PlayerY == Y)
-			{
-				cout << PlayerShape;
-
-			}
-			else if (MonsterX == X && MonsterY == Y)
-			{
-				cout << MonsterShape;
-			}
-			else
-			{
-				cout << " ";
-
-			}
-		}
-		cout << "\n";
-	}
+void Input(int x, int y) {
+	COORD Cur;
+	Cur.X = x;
+	Cur.Y = y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), Cur);
 }
 
 int main()
 {
+	Input(PlayerX, PlayerY);
+	cout << PlayerShape;
+
+	Input(MonsterX, MonsterY);
+	cout << MonsterShape;
+
 	while (bIsPlaying)
 	{
-		Input();
-		Process();
-		Render();
-	}
+		KeyCode = _getch();
 
+		int PrevPlayerX = PlayerX;
+		int PrevPlayerY = PlayerY;
+
+		if (KeyCode == 'w')
+		{
+			PlayerY--;
+		}
+		else if (KeyCode == 's')
+		{
+			PlayerY++;
+		}
+		else if (KeyCode == 'a')
+		{
+			PlayerX--;
+		}
+		else if (KeyCode == 'd')
+		{
+			PlayerX++;
+		}
+		else if (KeyCode == 'q')
+		{
+			bIsPlaying = false;
+			break; 
+		}
+		system("cls");
+
+		Input(PlayerX, PlayerY);
+		cout << PlayerShape;
+
+		Input(MonsterX, MonsterY);
+		cout << MonsterShape;
+	}
 	return 0;
 }

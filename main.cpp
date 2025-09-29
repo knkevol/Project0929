@@ -59,25 +59,18 @@ void Process()
 	{
 		bIsPlaying = false;
 	}
-	system("cls");	
-
+	system("cls");
 }
 
 int main()
 {
-	//초기위치 설정
-	Render(PlayerX, PlayerY);
-	Render(MonsterX, MonsterY);
-
-	while (bIsPlaying)
+	do
 	{
-		Input();
-		Process();
-		//현재 상태 업데이트
 		Render(PlayerX, PlayerY);
 		Render(MonsterX, MonsterY);
-	}
+		Input();
+		Process();
+	} while (bIsPlaying);
 	
-
 	return 0;
 }

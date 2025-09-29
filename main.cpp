@@ -10,6 +10,7 @@ int PlayerY = 1;
 int MonsterX = 8;
 int MonsterY = 8;
 char PlayerShape = 'P';
+
 char MonsterShape = 'M';
 bool bIsPlaying = true;
 

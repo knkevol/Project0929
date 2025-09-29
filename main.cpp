@@ -2,23 +2,23 @@
 #include <conio.h>
 #include <Windows.h>
 
+#define PlayerPos 1
+#define MonsterPos 8
+
 using namespace std;
 
-int PlayerX = 1;
-int PlayerY = 1;
-int MonsterX = 8;
-int MonsterY = 8;
+int PlayerX = PlayerPos;
+int PlayerY = PlayerPos;
+int MonsterX = MonsterPos;
+int MonsterY = MonsterPos;
 char PlayerShape = 'P';
 char MonsterShape = 'M';
 bool bIsPlaying = true;
-
 int KeyCode = 0;
 
-int Input()
+void Input()
 {
 	KeyCode = _getch();
-
-	return 0;
 }
 
 void Render(int x, int y) {
@@ -37,7 +37,7 @@ void Render(int x, int y) {
 	}
 }
 
-int Process()
+void Process()
 {
 	if (KeyCode == 'w')
 	{
@@ -61,8 +61,6 @@ int Process()
 	}
 	system("cls");	
 
-	return 0;
-	
 }
 
 int main()
